@@ -64,14 +64,14 @@ export default function Page() {
 
         {/* Video 1 (Desktop) */}
         <VideoSectionDesktop
-          src={`${process.env.NEXT_PUBLIC_URL_CDN}/background-desktop.mp4`}
+          src={`/background-desktop.mp4`}
           label="Video 1 Desktop"
           id="d1"
         />
 
         {/* Logo principal (más grande en desktop) */}
         <img
-          src={`${process.env.NEXT_PUBLIC_URL_CDN}/lctm.png`}
+          src={`/lctm.png`}
           alt="Logo principal"
           width={620}
           height={140}
@@ -86,7 +86,7 @@ export default function Page() {
               className="bg-transparent text-black py-2 rounded-md cursor-pointer hover:scale-125 transition-transform duration-300"
             >
               <img
-                src={`${process.env.NEXT_PUBLIC_URL_CDN}/button.png`}
+                src={`/button.png`}
                 alt="Botón principal"
                 width={560}
                 height={160}
@@ -100,20 +100,20 @@ export default function Page() {
 
         {/* Más videos desktop */}
         <VideoSectionDesktop
-          src={`${process.env.NEXT_PUBLIC_URL_CDN}/background-desktop-2.mp4`}
+          src={`/background-desktop-2.mp4`}
           label="Video 2 Desktop"
           id="d2"
         />
 
         <VideoSectionDesktop
-          src={`${process.env.NEXT_PUBLIC_URL_CDN}/background-desktop-3.mp4`}
+          src={`/background-desktop-3.mp4`}
           label="Video 3 Desktop"
           id="d3"
         />
         <div className="h-[100px] w-full bg-black"></div>
         <button onClick={() => setOpenForm(true)}>      
         <VideoSectionDesktop
-          src={`${process.env.NEXT_PUBLIC_URL_CDN}/background-desktop-4.mp4`}
+          src={`/background-desktop-4.mp4`}
           label="Video 4 Desktop"
           id="d4"
         />
@@ -127,7 +127,7 @@ export default function Page() {
                   {/* Spacer */}
        
         {/* Modal Lead */}
-        <LeadFormModal open={openForm} onOpenChange={setOpenForm} baseUrl="https://mooneymaker.co/home?ref=64349" />
+        <LeadFormModal open={openForm} onOpenChange={setOpenForm} baseUrl={process.env.NEXT_PUBLIC_BASE_URL} />
       </main>
     )
   }
@@ -137,14 +137,14 @@ export default function Page() {
     <main className="relative bg-black min-h-screen">
       {/* Video 1 */}
       <VideoSection
-        src={`${process.env.NEXT_PUBLIC_URL_CDN}/landing-mobile4.mp4`}
+        src={`/landing-mobile4.mp4`}
         label="Video 1: Relámpagos y templo"
         id="1"
       />
 
       {/* Imagen base */}
       <img
-        src={`${process.env.NEXT_PUBLIC_URL_CDN}/lctm.png`}
+        src={`/lctm.png`}
         alt="Logo principal"
         width={300}
         height={100}
@@ -155,7 +155,7 @@ export default function Page() {
         <div className="absolute top-40 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
           <div className="animate-spin-slow">
             <img
-              src={`${process.env.NEXT_PUBLIC_URL_CDN}/rulet2.png`}
+              src={`/rulet2.png`}
               alt="Ruleta girando"
               width={300}
               height={300}
@@ -169,7 +169,7 @@ export default function Page() {
         {showButton && !openForm && (
           <button onClick={handleButton} className="bg-transparent text-black py-2 rounded-md ">
             <img
-              src={`${process.env.NEXT_PUBLIC_URL_CDN}/button.png`}
+              src={`/button.png`}
               alt="Logo principal"
               width={300}
               height={100}
@@ -186,7 +186,7 @@ export default function Page() {
 
       {/* Video 2 */}
       <VideoSection
-        src={`${process.env.NEXT_PUBLIC_URL_CDN}/background-mobile-2.mp4`}
+        src={`/background-mobile-2.mp4`}
         label="Video 2: Relámpagos y templo"
         id="2"
       />
@@ -195,7 +195,7 @@ export default function Page() {
         {showButton && !openForm && (
           <button onClick={handleButton} className="bg-transparent text-black py-2 rounded-md">
             <img
-              src={`${process.env.NEXT_PUBLIC_URL_CDN}/button-2.png`}
+              src={`/button-2.png`}
               alt="Logo principal"
               width={300}
               height={100}
@@ -208,7 +208,7 @@ export default function Page() {
 
 
       {/* Modal */}
-      <LeadFormModal open={openForm} onOpenChange={setOpenForm} baseUrl="https://mooneymaker.co/home?ref=64349" />
+      <LeadFormModal open={openForm} onOpenChange={setOpenForm} baseUrl={process.env.NEXT_PUBLIC_BASE_URL} />
 
       {/* Estilo para giro lento (solo si usas animate-spin-slow) */}
       <style jsx global>{`
@@ -270,7 +270,7 @@ function DesktopFooter({ onOpenForm }: { onOpenForm: () => void }) {
 
 /* ----------------------------- VideoSection (Mobile-first) ----------------------------- */
 function VideoSection({
-  src = `${process.env.NEXT_PUBLIC_URL_CDN}/landing-mobile4.mp4`,
+  src = `/landing-mobile4.mp4`,
   label = "Sección de video",
   topFadeHeight = 200,
   sideFadeWidthMobile = 72,
