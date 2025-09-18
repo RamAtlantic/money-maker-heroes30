@@ -3,6 +3,58 @@
 import { useEffect, useState } from "react"
 import { Loader2 } from "lucide-react"
 import { LeadFormModal } from "@/components/modal-lead"
+import { OptimizedImage, OptimizedLogo, OptimizedButton, InstagramOptimizedImage } from "@/components/optimized-image"
+
+// Componente simple para GIFs de fondo optimizados
+function GifBackground({
+  src,
+  fallbackSrc,
+  className = "",
+  alt = "Background animation"
+}: {
+  src: string
+  fallbackSrc?: string
+  className?: string
+  alt?: string
+}) {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [hasError, setHasError] = useState(false)
+
+  useEffect(() => {
+    const img = new Image()
+    img.onload = () => setIsLoaded(true)
+    img.onerror = () => setHasError(true)
+    img.src = src
+  }, [src])
+
+  if (hasError && fallbackSrc) {
+    return (
+      <img
+        src={fallbackSrc}
+        alt={alt}
+        className={`w-full h-full object-cover ${className}`}
+        loading="lazy"
+      />
+    )
+  }
+
+  return (
+    <div className={`relative w-full h-full ${className}`}>
+      {!isLoaded && (
+        <div className="absolute inset-0 bg-black animate-pulse" />
+      )}
+      <img
+        src={src}
+        alt={alt}
+        className={`w-full h-full object-cover transition-opacity duration-300 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
+        loading="lazy"
+        onError={() => setHasError(true)}
+      />
+    </div>
+  )
+}
 
 export default function Page() {
   const [showImages, setShowImages] = useState(false)
@@ -70,12 +122,13 @@ export default function Page() {
         />
 
         {/* Logo principal (más grande en desktop) */}
-        <img
+        <OptimizedLogo
           src={`/lctm.png`}
           alt="Logo principal"
           width={620}
           height={140}
-          className="absolute top-70 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain z-10"
+          className="absolute top-70 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+          priority={true}
         />
 
         {/* Botón CTA (desktop) */}
@@ -85,12 +138,12 @@ export default function Page() {
               onClick={handleButton}
               className="bg-transparent text-black py-2 rounded-md cursor-pointer hover:scale-125 transition-transform duration-300"
             >
-              <img
+              <OptimizedButton
                 src={`/button.png`}
                 alt="Botón principal"
                 width={560}
                 height={160}
-                className="object-contain pointer-events-none select-none"
+                className="pointer-events-none select-none"
               />
             </button>
           )}
@@ -136,30 +189,30 @@ export default function Page() {
   return (
     <main className="relative bg-black min-h-screen">
       {/* Video 1 */}
-      <VideoSection
-        src={`/landing-mobile4.mp4`}
-        label="Video 1: Relámpagos y templo"
-        id="1"
+      <GifBackground
+        src={`/gif.webp`}
+        alt="Video 1: Relámpagos y templo"
       />
 
       {/* Imagen base */}
-      <img
+      <OptimizedLogo
         src={`/lctm.png`}
         alt="Logo principal"
         width={300}
         height={100}
-        className="absolute top-40 left-1/2 -translate-x-1/2 -translate-y-1/2 object-contain z-10"
+        className="absolute top-40 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+        priority={true}
       />
 
       {showImages && (
         <div className="absolute top-40 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
           <div className="animate-spin-slow">
-            <img
+            <InstagramOptimizedImage
               src={`/rulet2.png`}
               alt="Ruleta girando"
-              width={300}
-              height={300}
+              aspectRatio="square"
               className="object-contain pointer-events-none select-none"
+              priority={true}
             />
           </div>
         </div>
@@ -168,12 +221,12 @@ export default function Page() {
       <div className="absolute top-[38%]  left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center w-full z-20">
         {showButton && !openForm && (
           <button onClick={handleButton} className="bg-transparent text-black py-2 rounded-md ">
-            <img
+            <OptimizedButton
               src={`/button.png`}
-              alt="Logo principal"
+              alt="Botón principal"
               width={300}
               height={100}
-              className="object-contain pointer-events-none select-none"
+              className="pointer-events-none select-none"
             />
           </button>
         )}
@@ -183,23 +236,22 @@ export default function Page() {
       <section>
         <div className="h-20 bg-black" />
       </section>
-
+xw
       {/* Video 2 */}
-      <VideoSection
-        src={`/background-mobile-2.mp4`}
-        label="Video 2: Relámpagos y templo"
-        id="2"
+      <GifBackground
+        src={`/gif2.webp`}
+        alt="Video 2: Relámpagos y templo"
       />
 
       <div className="absolute -bottom-0 flex justify-center items-center w-full z-20">
         {showButton && !openForm && (
           <button onClick={handleButton} className="bg-transparent text-black py-2 rounded-md">
-            <img
+            <OptimizedButton
               src={`/button-2.png`}
-              alt="Logo principal"
+              alt="Botón secundario"
               width={300}
               height={100}
-              className="object-contain pointer-events-none select-none"
+              className="pointer-events-none select-none"
             />
           </button>
         )}
